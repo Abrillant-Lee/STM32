@@ -15,4 +15,4 @@
 *.eide-template
 
 #other
-/data
+#/data
