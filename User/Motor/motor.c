@@ -1,5 +1,11 @@
 #include "motor.h"
 
+/*
+ * name  :  GENERAL_TIM_GPIO_Config
+ * brief :  TIM2_CH1引脚配置
+ * param :  无
+ * return:  无
+ */
 static void GENERAL_TIM_GPIO_Config(void)
 {
     GPIO_InitTypeDef GPIO_InitStructure;
@@ -11,7 +17,28 @@ static void GENERAL_TIM_GPIO_Config(void)
     GPIO_Init(GENERAL_TIM_CHx_PORT, &GPIO_InitStructure);
 }
 
-// 使用TIM功能的PWM模式
+/*
+ * name  :  GPIO_DIR_Config
+ * brief :  DIR引脚配置
+ * param :  无
+ * return:  无
+ */
+void GPIO_DIR_Config(void)
+{
+    GPIO_InitTypeDef GPIO_InitStructure;
+    RCC_APB2PeriphClockCmd(DIR_GPIO_CLK, ENABLE);
+    GPIO_InitStructure.GPIO_Pin   = DIR_PIN;
+    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(DIR_PORT, &GPIO_InitStructure);
+}
+
+/*
+ * name  :  GENERAL_TIM_Mode_Config
+ * brief :  TIM2模式配置
+ * param :  无
+ * return:  无
+ */
 static void GENERAL_TIM_Mode_Config(void)
 {
     // 开启定时器时钟,即内部时钟CK_INT=72M
@@ -50,15 +77,27 @@ static void GENERAL_TIM_Mode_Config(void)
     TIM_Cmd(GENERAL_TIM, ENABLE);
 }
 
-// 定义一个初始化函数，同时初始化时基与输出比较
+/*
+ * name  :  GENERAL_TIM_Init
+ * brief :  TIM2初始化
+ * param :  无
+ * return:  无
+ */
 void GENERAL_TIM_Init(void)
 {
     GENERAL_TIM_GPIO_Config();
     GENERAL_TIM_Mode_Config();
+    // 电机方向引脚初始化
+    GPIO_DIR_Config();
 }
 
-// 占空比配置
-void SERVO_Angle_Control(uint16_t Comparex)
+/*
+ * name  :  SERVO_Angle_Control
+ * brief :  占空比配置
+ * param :  Comparex:占空比
+ * return:  无
+ */
+void Duty_Cycle_Control(uint16_t Comparex)
 {
     TIM_SetComparex(GENERAL_TIM, Comparex);
 }

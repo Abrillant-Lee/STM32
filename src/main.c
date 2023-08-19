@@ -7,13 +7,15 @@
 
 int main(void)
 {
-    // /*初始化串口*/
-    // USART_Config();
-    // /*初始化DTT11的引脚*/
-    // DHT11_Init();
-    // /*初始化TIMx*/
+    /*初始化串口*/
+    USART_Config();
+    /*初始化DTT11的引脚*/
+    DHT11_Init();
+    /*初始化TIMx*/
     GENERAL_TIM_Init();
-    SERVO_Angle_Control(15);
+    /*初始化定时器输出比较通道1的GPIO*/
+    Duty_Cycle_Control(150);
+
     while (1) {
         // Printf_TempAndHumidity();
         // Delay_Ms(2000);
