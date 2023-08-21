@@ -4,7 +4,7 @@
 #include "delay.h"
 #include "huaweiyun.h"
 #include "motor.h"
-
+#include "encoder.h"
 int main(void)
 {
     /*初始化串口*/
@@ -16,6 +16,8 @@ int main(void)
     /*初始化定时器输出比较通道1的GPIO*/
     Duty_Cycle_Control(150);
 
+    // 编码器初始化
+    Encoder_TIM2_Init();
     while (1) {
         // Printf_TempAndHumidity();
         // Delay_Ms(2000);
