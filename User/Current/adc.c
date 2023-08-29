@@ -93,5 +93,4 @@ void ADC_Value_printf(void)
            ADC_ConvertedValue);
     printf("\r\n The current AD value = %f V \r\n",
            ADC_ConvertedValueLocal);
-    printf("\r\n\r\n");
 }
