@@ -5,6 +5,8 @@
 #include "huaweiyun.h"
 #include "motor.h"
 #include "encoder.h"
+extern __IO uint16_t ADC_ConvertedValue;
+
 int main(void)
 {
     /*初始化串口*/
@@ -18,8 +20,9 @@ int main(void)
 
     // 编码器初始化
     Encoder_TIM2_Init();
+    // ADC 初始化
+    ADCx_Init();
+
     while (1) {
-        // Printf_TempAndHumidity();
-        // Delay_Ms(2000);
     }
 }
